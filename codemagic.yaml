@@ -1,0 +1,32 @@
+workflows:
+  ios-workflow:
+    name: Rizzsist iOS Build
+    instance_type: mac_mini_m2
+    max_build_duration: 120
+    environment:
+      xcode: 15.4
+      vars:
+        APP_NAME: "Rizzsist"
+    scripts:
+      - name: Set up keychain
+        script: |
+          keychain initialize
+      - name: Fetch dependencies
+        script: |
+          cd $CM_BUILD_DIR
+          echo "No dependencies"
+      - name: Build IPA
+        script: |
+          cd $CM_BUILD_DIR
+          xcodebuild -scheme Rizzsist -archivePath build/Rizzsist.xcarchive -configuration Release archive
+          xcodebuild -exportArchive -archivePath build/Rizzsist.xcarchive -exportPath build/ipa -exportOptionsPlist codemagic_export_options.plist
+    artifacts:
+      - build/ipa/*.ipa
+      - build/Rizzsist.xcarchive
+    publishing:
+      email:
+        recipients:
+          - laura@example.com
+        notify:
+          success: true
+          failure: true
