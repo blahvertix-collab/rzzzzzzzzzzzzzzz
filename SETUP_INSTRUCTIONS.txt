@@ -1,0 +1,2 @@
+﻿Create Rizzsist.xcodeproj in Xcode with targets: Rizzsist (App) and RizzsistKeyboard (Keyboard Extension).
+NEXT STEPS: Open Xcode, create new iOS App project named 'Rizzsist', then add new target 'Keyboard Extension' named 'RizzsistKeyboard'. Configure bundle IDs appropriately. Copy Swift files from rizzsist/ and rizzsistKeyboard/ into Xcode groups.
