@@ -22,7 +22,7 @@
       - name: Build IPA
         script: |
           cd $CM_BUILD_DIR
-          xcodebuild -scheme Rizzsist -archivePath build/Rizzsist.xcarchive -configuration Release archive
+          xcodebuild -project Rizzsist.xcodeproj -scheme Rizzsist -archivePath build/Rizzsist.xcarchive -configuration Release archive
           xcodebuild -exportArchive -archivePath build/Rizzsist.xcarchive -exportPath build/ipa -exportOptionsPlist codemagic_export_options.plist
     artifacts:
       - build/ipa/*.ipa
@@ -34,4 +34,5 @@
         notify:
           success: true
           failure: true
+
 
