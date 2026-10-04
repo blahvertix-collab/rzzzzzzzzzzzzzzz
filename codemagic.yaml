@@ -15,11 +15,14 @@
         script: |
           cd $CM_BUILD_DIR
           echo "No dependencies"
-      - name: Build IPA
+      - name: Generate Xcode project
         script: |
           cd $CM_BUILD_DIR
           xcodegen generate
-xcodebuild -scheme Rizzsist -archivePath build/Rizzsist.xcarchive -configuration Release archive
+      - name: Build IPA
+        script: |
+          cd $CM_BUILD_DIR
+          xcodebuild -scheme Rizzsist -archivePath build/Rizzsist.xcarchive -configuration Release archive
           xcodebuild -exportArchive -archivePath build/Rizzsist.xcarchive -exportPath build/ipa -exportOptionsPlist codemagic_export_options.plist
     artifacts:
       - build/ipa/*.ipa
@@ -31,4 +34,3 @@ xcodebuild -scheme Rizzsist -archivePath build/Rizzsist.xcarchive -configuration
         notify:
           success: true
           failure: true
-
