@@ -37,6 +37,8 @@
       - build/Rizzsist.xcarchive
     publishing:
       email:
+        recipients:
+          - laura@example.com
         notify:
           success: true
           failure: true
