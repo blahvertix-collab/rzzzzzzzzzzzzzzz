@@ -18,7 +18,7 @@
       - name: Generate Xcode project
         script: |
           cd $CM_BUILD_DIR
-          xcodegen generate
+          brew install xcodegen || true; xcodegen generate
       - name: Build IPA
         script: |
           cd $CM_BUILD_DIR
@@ -34,3 +34,4 @@
         notify:
           success: true
           failure: true
+
