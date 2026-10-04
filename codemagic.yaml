@@ -5,34 +5,38 @@
     max_build_duration: 120
     environment:
       xcode: 16.4
-      vars:
-        APP_NAME: "Rizzsist"
     scripts:
-      - name: Set up keychain
-        script: |
-          keychain initialize
-      - name: Fetch dependencies
-        script: |
-          cd $CM_BUILD_DIR
-          echo "No dependencies"
       - name: Generate Xcode project
         script: |
           cd $CM_BUILD_DIR
-          brew install xcodegen || true; xcodegen generate
-      - name: Build IPA
+          brew install xcodegen || true
+          xcodegen generate
+      - name: Build unsigned archive
         script: |
           cd $CM_BUILD_DIR
-          xcodebuild -project Rizzsist.xcodeproj -scheme Rizzsist -archivePath build/Rizzsist.xcarchive -configuration Release archive
-          xcodebuild -exportArchive -archivePath build/Rizzsist.xcarchive -exportPath build/ipa -exportOptionsPlist codemagic_export_options.plist
+          xcodebuild -project Rizzsist.xcodeproj \
+            -scheme Rizzsist \
+            -configuration Release \
+            -archivePath build/Rizzsist.xcarchive \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            archive
+      - name: Package unsigned IPA
+        script: |
+          cd $CM_BUILD_DIR
+          rm -rf build/ipa
+          mkdir -p build/ipa/Payload
+          cp -R build/Rizzsist.xcarchive/Products/Applications/Rizzsist.app build/ipa/Payload/
+          cd build/ipa
+          zip -qry Rizzsist-unsigned.ipa Payload
+          cd $CM_BUILD_DIR
+          echo "IPA created at build/ipa/Rizzsist-unsigned.ipa"
     artifacts:
       - build/ipa/*.ipa
       - build/Rizzsist.xcarchive
     publishing:
       email:
-        recipients:
-          - laura@example.com
         notify:
           success: true
           failure: true
-
-

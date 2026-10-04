@@ -3,9 +3,10 @@ options:
   bundleIdPrefix: com.rizzsist
   deploymentTarget: 15.0
 settings:
-  CODE_SIGN_STYLE: Automatic
-  CODE_SIGNING_ALLOWED: YES
-  DEVELOPMENT_TEAM: ""
+  CODE_SIGN_STYLE: Manual
+  CODE_SIGNING_ALLOWED: NO
+  CODE_SIGNING_REQUIRED: NO
+  CODE_SIGN_IDENTITY: ""
 targets:
   Rizzsist:
     type: application
@@ -14,6 +15,13 @@ targets:
       - path: Rizzsist
     settings:
       PRODUCT_BUNDLE_IDENTIFIER: com.rizzsist.app
+      GENERATE_INFOPLIST_FILE: YES
+      INFOPLIST_KEY_CFBundleDisplayName: Rizzsist
+      INFOPLIST_KEY_UILaunchScreen_Generation: YES
+      INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+    dependencies:
+      - target: RizzsistKeyboard
+        embed: true
   RizzsistKeyboard:
     type: app-extension
     platform: iOS
@@ -21,3 +29,10 @@ targets:
       - path: RizzsistKeyboard
     settings:
       PRODUCT_BUNDLE_IDENTIFIER: com.rizzsist.app.keyboard
+      GENERATE_INFOPLIST_FILE: YES
+      INFOPLIST_KEY_CFBundleDisplayName: Rizzsist
+      INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier: com.apple.keyboard-service
+      INFOPLIST_KEY_NSExtension_NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).KeyboardViewController
+      INFOPLIST_KEY_NSExtension_NSExtensionAttributes_PrimaryLanguage: en-US
+      INFOPLIST_KEY_NSExtension_NSExtensionAttributes_RequestsOpenAccess: YES
+      INFOPLIST_KEY_NSExtension_NSExtensionAttributes_IsASCIICapable: NO
