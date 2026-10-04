@@ -1,11 +1,15 @@
-name: Rizzsist
+﻿name: Rizzsist
 options:
   bundleIdPrefix: com.rizzsist
+  deploymentTarget: 15.0
+settings:
+  CODE_SIGN_STYLE: Automatic
+  CODE_SIGNING_ALLOWED: YES
+  DEVELOPMENT_TEAM: ""
 targets:
   Rizzsist:
     type: application
     platform: iOS
-    deploymentTarget: 15.0
     sources:
       - path: Rizzsist
     settings:
@@ -13,7 +17,6 @@ targets:
   RizzsistKeyboard:
     type: app-extension
     platform: iOS
-    deploymentTarget: 15.0
     sources:
       - path: RizzsistKeyboard
     settings:
