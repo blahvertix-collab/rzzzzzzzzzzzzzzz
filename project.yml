@@ -1,0 +1,20 @@
+name: Rizzsist
+options:
+  bundleIdPrefix: com.rizzsist
+targets:
+  Rizzsist:
+    type: application
+    platform: iOS
+    deploymentTarget: 15.0
+    sources:
+      - path: Rizzsist
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.rizzsist.app
+  RizzsistKeyboard:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: 15.0
+    sources:
+      - path: RizzsistKeyboard
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.rizzsist.app.keyboard

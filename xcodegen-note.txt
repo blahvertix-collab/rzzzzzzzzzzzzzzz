@@ -1,0 +1,1 @@
+﻿Generate XcodeGen project (project.yml) added - use XcodeGen on Codemagic to create .xcodeproj

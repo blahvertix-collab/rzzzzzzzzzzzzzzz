@@ -1,4 +1,4 @@
-workflows:
+﻿workflows:
   ios-workflow:
     name: Rizzsist iOS Build
     instance_type: mac_mini_m2
@@ -18,7 +18,8 @@ workflows:
       - name: Build IPA
         script: |
           cd $CM_BUILD_DIR
-          xcodebuild -scheme Rizzsist -archivePath build/Rizzsist.xcarchive -configuration Release archive
+          xcodegen generate
+xcodebuild -scheme Rizzsist -archivePath build/Rizzsist.xcarchive -configuration Release archive
           xcodebuild -exportArchive -archivePath build/Rizzsist.xcarchive -exportPath build/ipa -exportOptionsPlist codemagic_export_options.plist
     artifacts:
       - build/ipa/*.ipa
@@ -30,3 +31,4 @@ workflows:
         notify:
           success: true
           failure: true
+
