@@ -20,7 +20,8 @@
           cd $CM_BUILD_DIR
           rm -rf build/ipa
           mkdir -p build/ipa/Payload
-          APP_PATH="build/DerivedData/Build/Products/Release-iphoneos/Rizzsist.app"
+          APP_PATH=$(find build/DerivedData -name "Rizzsist.app" -type d | head -n 1)
+          echo "Found $APP_PATH"
           cp -R "$APP_PATH" build/ipa/Payload/
           cd build/ipa
           zip -qry Rizzsist-unsigned.ipa Payload
